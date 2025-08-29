@@ -1,0 +1,7 @@
+mediapipe
+MNN
+numpy
+opencv-python
+pandas
+pygame
+screeninfo
