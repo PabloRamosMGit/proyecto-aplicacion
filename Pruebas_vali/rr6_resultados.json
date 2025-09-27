@@ -1,0 +1,24 @@
+[
+  {
+    "file": "C:\\proyecto_aplica\\proyecto-aplicacion\\Pruebas_vali\\resultados\\test_session.csv",
+    "samples_total": 3275,
+    "timestamps_found": 3275,
+    "deltas_count": 3274,
+    "units_mode": "ns",
+    "interval": {
+      "avg_s": 0.03654475877336592,
+      "min_s": 0.030086144,
+      "max_s": 0.078785792,
+      "p95_s": 0.039694118400000006,
+      "p99_s": 0.048137546239999995
+    },
+    "thresholds": {
+      "requirement_s": 5.0,
+      "recommended_s": 0.25,
+      "pct_within_requirement": 1.0,
+      "pct_within_recommended": 1.0,
+      "pass_requirement": true,
+      "pass_recommended": true
+    }
+  }
+]

@@ -1,0 +1,11 @@
+RR-6 Check
+Archivo analizado: C:\proyecto_aplica\proyecto-aplicacion\Pruebas_vali\resultados\test_session.csv
+Muestras totales (filas CSV): 3275
+Intervalos calculados: 3274 (unidades inferidas: ns)
+Intervalo medio: 36.54 ms
+Intervalo mínimo: 30.09 ms
+Intervalo máximo: 78.79 ms
+P95 intervalo: 39.69 ms
+P99 intervalo: 48.14 ms
+<= 5.00 s: 100.00%  (PASS=True)
+<= 0.250 s: 100.00%  (PASS=True)
