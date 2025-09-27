@@ -1,0 +1,11 @@
+RF-3 Check
+Archivo analizado: C:\proyecto_aplica\proyecto-aplicacion\Pruebas_vali\resultados\test_session.csv
+Muestras totales: 3275
+tracking_status == 1: 3275 (100.00%)
+status == 1: 3275 (100.00%)
+Apertura ojo izquierdo > 0: 3275 (100.00%)
+Apertura ojo derecho > 0: 3275 (100.00%)
+Intervalo medio: 36.54 ms (aprox. 27.36 fps)
+Intervalo minimo: 30.09 ms
+Intervalo maximo: 78.79 ms
+Intervalos <= 250 ms: 100.00%

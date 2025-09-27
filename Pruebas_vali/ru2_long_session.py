@@ -1,10 +1,18 @@
 import os
+import sys
 
 import pygame
 from pygame.locals import KEYDOWN, K_RETURN
 
+CURRENT_DIR = os.path.dirname(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, os.pardir))
+GAZEFOLLOWER_ROOT = os.path.join(PROJECT_ROOT, "GazeFollower-1.0.1")
+if GAZEFOLLOWER_ROOT not in sys.path:
+    sys.path.insert(0, GAZEFOLLOWER_ROOT)
+
 from gazefollower import GazeFollower
 from gazefollower.gaze_estimator import MGazeNetGazeEstimator
+
 
 if __name__ == '__main__':
     # init pygame

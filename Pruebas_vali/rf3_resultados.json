@@ -1,0 +1,26 @@
+{
+  "rf": "RF-3",
+  "csv_path": "C:\\proyecto_aplica\\proyecto-aplicacion\\Pruebas_vali\\resultados\\test_session.csv",
+  "interval_threshold_seconds": 0.25,
+  "samples": {
+    "total": 3275,
+    "tracking_status_1": 3275,
+    "status_1": 3275,
+    "left_eye_openness_gt0": 3275,
+    "right_eye_openness_gt0": 3275
+  },
+  "rates": {
+    "detection_rate": 1.0,
+    "status_rate": 1.0,
+    "left_eye_rate": 1.0,
+    "right_eye_rate": 1.0,
+    "continuity_rate_le_threshold": 1.0
+  },
+  "timing": {
+    "avg_interval_seconds": 0.036544758796579105,
+    "min_interval_seconds": 0.0300861,
+    "max_interval_seconds": 0.0787859,
+    "approx_fps": 27.363705027206482,
+    "threshold_ms": 250.0
+  }
+}
