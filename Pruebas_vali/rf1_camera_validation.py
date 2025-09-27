@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 RF-1: Validación de captura de entradas visuales
 
