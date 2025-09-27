@@ -12,10 +12,14 @@ python "Pruebas_vali/rf1_camera_validation.py"
 python "Pruebas_vali/rf1_camera_validation.py" --format json
 python "Pruebas_vali/rf1_camera_validation.py" --format both
 
+
+
 # Ejecutar RU-2 (sesión >30 min, default 31 min)
 python "Pruebas_vali/ru2_long_session.py"
 python "Pruebas_vali/ru2_long_session.py" --duration-min 45
 ru2_long_session.py
+
+python "Pruebas_vali/rf3_test_session.py"
 
 C:\proyecto_aplica\proyecto-aplicacion\GazeFollower-1.0.1\example\rf1_camera_validation.py 
 aaa

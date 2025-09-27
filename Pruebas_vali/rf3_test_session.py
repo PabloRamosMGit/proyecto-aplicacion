@@ -1,13 +1,18 @@
-# _*_ coding: utf-8 _*_
-# Author: GC Zhu
-# Email: zhugc2016@gmail.com
 import os
+import sys
 
 import pygame
 from pygame.locals import KEYDOWN, K_RETURN
 
+CURRENT_DIR = os.path.dirname(__file__)
+PROJECT_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, os.pardir))
+GAZEFOLLOWER_ROOT = os.path.join(PROJECT_ROOT, "GazeFollower-1.0.1")
+if GAZEFOLLOWER_ROOT not in sys.path:
+    sys.path.insert(0, GAZEFOLLOWER_ROOT)
+
 from gazefollower import GazeFollower
 from gazefollower.gaze_estimator import MGazeNetGazeEstimator
+
 
 if __name__ == '__main__':
     # init pygame
@@ -40,7 +45,7 @@ if __name__ == '__main__':
 
         # now lets show the gaze point, press any key to close the window
         got_key = False
-        max_duration = 60 * 1000 # 60 seconds 
+        max_duration = 120 * 1000 # 120 seconds
         t_start = pygame.time.get_ticks()
         pygame.event.clear()  # clear all cached events if there were any
         gx, gy = -65536, -65536
@@ -71,9 +76,9 @@ if __name__ == '__main__':
     gf.stop_sampling()
 
     # save the sample data to file
-    data_dir = "./data"
+    data_dir = "C:\\proyecto_aplica\\proyecto-aplicacion\\Pruebas_vali\\resultados"
     os.makedirs(data_dir, exist_ok=True)
-    file_name = "free_viewing_pygame_demo.csv"
+    file_name = "test_session.csv"
     gf.save_data(os.path.join(data_dir, file_name))
     # release gaze follower
     gf.release()
