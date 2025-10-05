@@ -1,0 +1,18 @@
+========================================================================
+RESUMEN DE MÉTRICAS
+========================================================================
+Muestras usadas: 229 | Ventana: 5.04s → 119.73s (duración 114.70s) | Warm-up excluido: 5.00s
+Núcleos lógicos (Task Manager base): 12
+
+CPU (psutil-style, puede >100% por uso multi-hilo):
+  Media:   175.9%   Mediana:  178.1%   P95:  215.0%   Min–Max:   97.1%– 243.8%
+CPU equivalente Task Manager (porcentaje global del equipo):
+  Media TM: 14.66%   P95 TM: 17.92%  (TM% ≈ CPU% / 12)
+
+Memoria RSS (MB):
+  Media:  283.18   Min–Max:  280.60– 284.08   σ:  1.11   Δ:  3.48
+  Tendencia (OLS): 1.664 MB/min
+
+Memoria VMS (MB) y Heap Python (MB):
+  VMS media:  625.09   Py heap medio:  1.33   Py peak máx:  2.58
+========================================================================
