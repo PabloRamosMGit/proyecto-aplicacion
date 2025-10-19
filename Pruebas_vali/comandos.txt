@@ -23,3 +23,5 @@ python "Pruebas_vali/extract_metrics.py" --json-out
 
 C:\proyecto_aplica\proyecto-aplicacion\GazeFollower-1.0.1\example\rf1_camera_validation.py 
 aaa
+
+python "Pruebas_vali/rf3_test_session.py"

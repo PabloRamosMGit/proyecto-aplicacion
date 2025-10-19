@@ -142,3 +142,23 @@ class CalibrationController:
             return cm2px(raw_pos, self.cam_pos, self.physical_screen_size, self.screen_size)
         else:
             return raw_pos[0] * self.screen_size[0], raw_pos[1] * self.screen_size[1]
+
+    def convert_to_cm(self, pixel_pos):
+        """
+        Convierte coordenadas en píxeles a centímetros físicos.
+
+        Args:
+            pixel_pos (tuple): Coordenadas (x, y) en píxeles.
+
+        Returns:
+            tuple: Coordenadas (x_cm, y_cm) en centímetros.
+        """
+        if not self.physical_screen_size:
+            raise ValueError("No se ha definido physical_screen_size para realizar la conversión.")
+
+        screen_w_px, screen_h_px = self.screen_size       # resolución (ej: 1920x1080)
+        screen_w_cm, screen_h_cm = self.physical_screen_size  # tamaño físico (ej: 53.1x29.9 cm)
+
+        cm_x = pixel_pos[0] * (screen_w_cm / screen_w_px)
+        cm_y = pixel_pos[1] * (screen_h_cm / screen_h_px)
+        return (cm_x, cm_y)

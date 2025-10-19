@@ -3,6 +3,8 @@
 # Email: zhugc2016@gmail.com
 
 import numpy as np
+from datetime import datetime
+from pathlib import Path
 
 from gazefollower.calibration import CalibrationController
 from .BaseUI import BaseUI
@@ -19,7 +21,11 @@ class CalibrationUI(BaseUI):
 
         self.config = config
         self.error_bar_color = (0, 255, 0)  # Green color for the error bar
-        self.error_bar_thickness = 2  # Thickness of the error bar lin
+        self.error_bar_thickness = 2  # Thickness of the error bar line
+
+        self._results_dir = Path(__file__).resolve().parents[2] / "data_prediction_results"
+        self._results_dir.mkdir(parents=True, exist_ok=True)
+        self.last_error_log_path = None
 
         self._sound_id = "beep"
         self.backend.load_sound(self.config.cali_target_sound, self._sound_id)
@@ -82,6 +88,7 @@ class CalibrationUI(BaseUI):
             uni_p = np.unique(point_ids)
             avg_labels = np.zeros((len(uni_p), label_dim))
             avg_predictions = np.zeros((len(uni_p), predictions_flat.shape[1]))
+            per_point_results = []
 
             for idx, point_id in enumerate(uni_p):
                 mask = (point_ids == point_id)
@@ -89,8 +96,26 @@ class CalibrationUI(BaseUI):
                 avg_label = np.mean(labels_flat[mask], axis=0)
                 avg_pred = np.mean(predictions_flat[mask], axis=0)
 
-                avg_labels[idx] = cali_controller.convert_to_pixel(avg_label)
-                avg_predictions[idx] = cali_controller.convert_to_pixel(avg_pred)
+                pixel_label = np.asarray(cali_controller.convert_to_pixel(avg_label), dtype=float)
+                pixel_prediction = np.asarray(cali_controller.convert_to_pixel(avg_pred), dtype=float)
+                delta = pixel_prediction - pixel_label
+
+                avg_labels[idx] = pixel_label
+                avg_predictions[idx] = pixel_prediction
+
+                per_point_results.append({
+                    "point_id": int(point_id),
+                    "label_x": float(pixel_label[0]),
+                    "label_y": float(pixel_label[1]),
+                    "prediction_x": float(pixel_prediction[0]),
+                    "prediction_y": float(pixel_prediction[1]),
+                    "delta_x": float(delta[0]),
+                    "delta_y": float(delta[1]),
+                    "distance": float(np.linalg.norm(delta))
+                })
+
+            if per_point_results:
+                self._store_calibration_errors(per_point_results)
 
         text += "\nPress `Space` to continue OR `R` to recalibration"
         while self.running:
@@ -113,6 +138,21 @@ class CalibrationUI(BaseUI):
                     self.backend.draw_line(avg_label[0], avg_label[1], avg_prediction[0], avg_prediction[1],
                                            self._color_gray, line_width=2)
             self.backend.after_draw()
+
+    def _store_calibration_errors(self, per_point_results):
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        file_path = self._results_dir / f"calibration_differences_{timestamp}.txt"
+        mean_distance = np.mean([row["distance"] for row in per_point_results])
+        with file_path.open("w", encoding="ascii") as file:
+            file.write("PointId,LabelX,LabelY,PredictionX,PredictionY,DeltaX,DeltaY,PixelDistance\n")
+            for row in per_point_results:
+                file.write(
+                    f"{row['point_id']},{row['label_x']:.4f},{row['label_y']:.4f},"
+                    f"{row['prediction_x']:.4f},{row['prediction_y']:.4f},"
+                    f"{row['delta_x']:.4f},{row['delta_y']:.4f},{row['distance']:.4f}\n"
+                )
+            file.write(f"\nMeanPixelDistance,{mean_distance:.4f}\n")
+        self.last_error_log_path = file_path
 
     def new_session(self):
         self.running = True
